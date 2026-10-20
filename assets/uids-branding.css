@@ -1,0 +1,372 @@
+/**
+ * uids-branding.css — trimmed University of Iowa branding.
+ *
+ * Rules are lifted from the compiled UIDS static dist
+ * (github.com/uiowa/uids, v5.0.0-alpha.0 dist/css/components:
+ * brand-bar.css, logo.css, brand-footer.css). The markup these
+ * target is the stable 4.x brand bar / footer (uids_base theme).
+ * Design tokens below are pinned to literal stable brand values so
+ * this file is self-contained and does not pull in the full 5.x
+ * token system. Healthcare/narrow/CTA variants are intentionally
+ * dropped — this is a one-page continuity site.
+ */
+
+:root {
+  --uiowa-color-brand-gold: #ffcd00;        /* Hawkeye Gold */
+  --uiowa-color-brand-black: #000000;
+  --uiowa-color-background-white: #ffffff;
+  --uiowa-color-text-inverse: #ffffff;      /* text on black */
+  --uiowa-typography-font-family-roboto: Roboto, "Helvetica Neue", Arial, sans-serif;
+  --uiowa-typography-font-family-zilla-slab: "Zilla Slab", Georgia, serif;
+  --uiowa-typography-font-weight-light: 300;
+  --uiowa-typography-font-weight-normal: 400;
+  --uiowa-typography-font-weight-heavy: 900;
+  --uiowa-typography-size-small: 0.875rem;
+  --uiowa-space-25: 0.25rem;
+  --uiowa-space-50: 0.5rem;
+  --uiowa-space-100: 1rem;
+  --uiowa-space-200: 2rem;
+  --uiowa-layout-container-max-standard: 81.875rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Visually-hidden label (accessible logo text). */
+.element-invisible {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: #1c1c1c;
+  background: var(--uiowa-color-background-white);
+  font-family: var(--uiowa-typography-font-family-roboto);
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+/* ------------------------------------------------------------------ *
+ * Brand bar (header)
+ * ------------------------------------------------------------------ */
+
+.iowa-bar {
+  position: relative;
+  z-index: 2;
+  display: block;
+  min-height: auto;
+  background: var(--uiowa-color-brand-black);
+}
+@media (min-width: 980px) {
+  .iowa-bar {
+    min-height: 80px;
+    height: 80px;
+    background: var(--uiowa-color-brand-gold);
+  }
+}
+
+.iowa-bar__container {
+  max-width: var(--uiowa-layout-container-max-standard);
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+@media (min-width: 980px) {
+  .iowa-bar__container {
+    display: flex;
+    justify-content: flex-start;
+  }
+}
+
+.iowa-bar .logo--tab {
+  margin-right: 20px;
+}
+@media (min-width: 84.375em) {
+  .iowa-bar .logo--tab {
+    margin-left: -12px;
+    padding: 27px 20px 20px;
+  }
+}
+
+.iowa-bar .site-name {
+  width: 100%;
+  padding: 1.25rem;
+  background: var(--uiowa-color-brand-gold);
+}
+@media (min-width: 980px) {
+  .iowa-bar .site-name {
+    width: auto;
+    padding: 0;
+    background: transparent;
+  }
+}
+@media (min-width: 84.375em) {
+  .iowa-bar .site-name {
+    margin: 5px 0 0 0;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Logo
+ * ------------------------------------------------------------------ */
+
+.logo {
+  display: block;
+}
+
+.logo--tab {
+  height: 70px;
+  width: 109px;
+  padding: 25px 1.25rem;
+  background: var(--uiowa-color-brand-black);
+}
+.logo--tab a:focus svg {
+  opacity: 0.5;
+}
+@media (min-width: 980px) {
+  .logo--tab {
+    width: 154px;
+    height: 80px;
+    padding: 25px;
+  }
+}
+@media (min-width: 84.375em) {
+  .logo--tab {
+    width: 188px;
+    height: 90px;
+    padding: 23px 20px;
+  }
+}
+
+.logo-icon {
+  fill: var(--uiowa-color-brand-gold);
+  height: 20px;
+}
+.logo-icon .logo-text {
+  fill: #ffffff;
+}
+@media (min-width: 980px) {
+  .logo-icon {
+    height: 30px;
+  }
+}
+@media (min-width: 84.375em) {
+  .logo-icon {
+    height: 43px;
+  }
+}
+.logo-icon:hover,
+.logo-icon:focus {
+  opacity: 0.7;
+}
+
+/* ------------------------------------------------------------------ *
+ * Site name
+ * ------------------------------------------------------------------ */
+
+.site-name {
+  display: flex;
+  align-items: center;
+  margin: 0 auto 0 0;
+  text-align: left;
+  font-size: 1.8rem;
+  font-weight: 300;
+  line-height: 1;
+  font-family: var(--uiowa-typography-font-family-roboto);
+}
+.site-name a {
+  color: var(--uiowa-color-brand-black);
+  text-decoration: none;
+}
+@media (min-width: 980px) {
+  .site-name {
+    flex-basis: content;
+    margin: 1px 0 0 0;
+    font-size: 2rem;
+  }
+}
+@media (min-width: 84.375em) {
+  .site-name {
+    margin: 5px 0 0 0;
+    font-size: 2.2rem;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Main content (prose)
+ * ------------------------------------------------------------------ */
+
+.content__container {
+  flex: 1 0 auto;
+  width: 100%;
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 4rem;
+}
+
+.footer {
+  flex-shrink: 0;
+}
+
+.status-updated {
+  margin: 0 0 1.5rem;
+  color: #63666a;
+  font-size: 0.9rem;
+}
+
+.content__container h1,
+.content__container h2,
+.content__container h3 {
+  font-family: var(--uiowa-typography-font-family-zilla-slab);
+  line-height: 1.15;
+  color: #000000;
+}
+.content__container h1 {
+  font-size: 2.25rem;
+  margin: 0 0 0.75rem;
+}
+.content__container h2 {
+  font-size: 1.5rem;
+  margin: 2.5rem 0 0.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid #e6e5e5;
+}
+.content__container p {
+  margin: 0 0 1rem;
+}
+.content__container a {
+  color: #00558c;
+}
+.content__container ul {
+  padding-left: 1.25rem;
+}
+.content__container li {
+  margin-bottom: 0.4rem;
+}
+.content__container hr {
+  border: 0;
+  border-top: 1px solid #e6e5e5;
+  margin: 2rem 0;
+}
+
+/* ------------------------------------------------------------------ *
+ * Footer
+ * ------------------------------------------------------------------ */
+
+.footer {
+  position: relative;
+  background: var(--uiowa-color-brand-black);
+  padding: 2.5rem 0;
+}
+@media (min-width: 980px) {
+  .footer {
+    padding: 2.5rem 0 0;
+  }
+}
+.footer a {
+  color: var(--uiowa-color-brand-gold);
+  text-decoration: none;
+  font-weight: var(--uiowa-typography-font-weight-normal);
+}
+.footer a:hover,
+.footer a:focus {
+  text-decoration: underline;
+}
+
+.footer__container {
+  margin: 0 1.25rem;
+  position: relative;
+}
+@media (min-width: 84.375em) {
+  .footer__container {
+    max-width: var(--uiowa-layout-container-max-standard);
+    margin: 0 auto;
+    padding: 0;
+  }
+}
+@media (min-width: 980px) {
+  .footer__container--flex {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: var(--uiowa-space-100);
+  }
+}
+
+.footer__links {
+  margin: 0 0 var(--uiowa-space-200);
+  flex-grow: 1;
+}
+
+.footer .site-name {
+  color: var(--uiowa-color-text-inverse);
+  font-size: 1.7rem;
+  margin-top: var(--uiowa-space-100);
+  margin-bottom: var(--uiowa-space-25);
+  font-weight: var(--uiowa-typography-font-weight-heavy);
+}
+.footer .site-name a {
+  color: var(--uiowa-color-text-inverse);
+  text-decoration: none;
+}
+.footer .site-name a:hover,
+.footer .site-name a:focus {
+  text-decoration: underline;
+}
+
+.logo--footer {
+  padding: 0 40px 0 0;
+  width: 128px;
+}
+@media (min-width: 980px) {
+  .logo--footer {
+    width: 145px;
+  }
+}
+
+/* Socket (copyright + policy links) */
+.socket__menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+.socket__menu li {
+  color: var(--uiowa-color-text-inverse);
+  font-size: var(--uiowa-typography-size-small);
+  border-right: 1px solid #5d5656;
+  margin-bottom: var(--uiowa-space-25);
+  padding: 0 var(--uiowa-space-50);
+}
+.socket__menu li:first-child {
+  flex-basis: 100%;
+  border-right: none;
+  padding-left: 0;
+}
+.socket__menu li:nth-child(2) {
+  padding-left: 0;
+}
+.socket__menu li:last-child {
+  border-right: none;
+  padding-right: 0;
+}
+.socket__menu li a {
+  text-decoration: none;
+  color: var(--uiowa-color-brand-gold);
+}
+.socket__menu li a:hover,
+.socket__menu li a:focus {
+  text-decoration: underline;
+}

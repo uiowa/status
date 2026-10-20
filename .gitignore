@@ -1,0 +1,11 @@
+# Build
+node_modules/
+index.html.tmp
+
+# User-specific: editor and agent files
+.idea/
+.vscode/
+.claude
+CLAUDE.local.md
+.aider
+.opencode

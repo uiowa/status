@@ -1,0 +1,14 @@
+# GitHub Code Owners — https://docs.github.com/articles/about-code-owners
+#
+# The developer team owns all the plumbing (build script, template, styles,
+# workflow, config). With branch protection set to "Require review from Code
+# Owners," changes to these paths need a developer approval before merging.
+#
+# status.md is intentionally left WITHOUT an owner (the empty line below), so
+# outage content can be updated without waiting on a code review.
+
+# Default owner for everything:
+*               @uiowa/developer
+
+# No owner — content editors can change this without developer sign-off:
+/status.md

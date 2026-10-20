@@ -1,0 +1,13 @@
+{
+  "name": "uiowa-status",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Lightly-branded static status page for uiowa.edu continuity communications.",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "dependencies": {
+    "marked": "12.0.2"
+  }
+}

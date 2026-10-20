@@ -63,6 +63,13 @@ Before shipping a change, confirm the ladder still holds:
 | `assets/uids-branding.css` | Trimmed UIDS branding, self-contained tokens. |
 | `.github/workflows/build.yml` | Builds & commits `index.html` on change. |
 
+## Serving & SEO
+
+The page is served at **`uiowa.edu`** on cutover, so **never add `noindex` or a
+robots.txt disallow** — they can deindex the real homepage. Temporary-outage
+signalling is done at the **edge** with HTTP `503` + `Retry-After`, not in the HTML.
+See the README's "Serving & SEO" section.
+
 ## Review model
 
 `CODEOWNERS` gives the `@uiowa/developer` team ownership of all plumbing;

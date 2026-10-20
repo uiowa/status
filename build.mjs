@@ -39,11 +39,18 @@ const BANNER = `<!--
 -->
 `;
 
-const html = template
-  .replace('<!DOCTYPE html>\n', '<!DOCTYPE html>\n' + BANNER)
+const page = template
   .replace('{{content}}', content)
   .replaceAll('{{built}}', built)
-  .replaceAll('{{year}}', String(new Date().getFullYear()));
+  .replaceAll('{{year}}', String(new Date().getFullYear()))
+  // Strip source comments so the shipped page doesn't narrate its internals (or
+  // the editor template) to anyone viewing source. Maintainer comments stay in
+  // template.html and status.md; only the banner below is added back.
+  .replace(/<!--[\s\S]*?-->/g, '')
+  .replace(/^[ \t]+$/gm, '')
+  .replace(/\n{3,}/g, '\n\n');
+
+const html = page.replace('<!DOCTYPE html>\n', '<!DOCTYPE html>\n' + BANNER);
 
 const tmp = p('index.html.tmp');
 await writeFile(tmp, html, 'utf8');

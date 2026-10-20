@@ -10,17 +10,27 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Campus Status | University of Iowa</title>
-  <meta name="description" content="Current campus status and outage updates for University of Iowa websites.">
 
-  <!-- Fonts are the ONLY hotlinked dependency. If this fails to load, the
-       CSS font stacks fall back to system sans-serif / serif and the page
-       stays fully legible. Everything else on this page is self-hosted. -->
+  <meta name="description" content="Current campus status and outage updates for University of Iowa websites.">
+  <meta name="theme-color" content="#000000">
+
+  <link rel="icon" href="assets/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon-precomposed.png">
+  <link rel="mask-icon" href="assets/safari-pinned-tab.svg" color="#000000">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="The University of Iowa">
+  <meta property="og:title" content="Campus status | The University of Iowa">
+  <meta property="og:description" content="Current campus status and outage updates for University of Iowa websites.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Campus status | The University of Iowa">
+  <meta name="twitter:description" content="Current campus status and outage updates for University of Iowa websites.">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Zilla+Slab:wght@400;600&display=swap" rel="stylesheet">
 
-  <!-- Critical branding: inlined so the gold bar, the IOWA wordmark, and
-       readable text survive even if uids-branding.css fails to load. -->
   <style>
     *, *::before, *::after { box-sizing: border-box; }
     body { margin: 0; min-height: 100vh; display: flex; flex-direction: column;
@@ -45,7 +55,6 @@
 </head>
 <body>
 
-  <!-- Brand bar -->
   <header data-uids-header class="iowa-bar inline">
     <div class="iowa-bar__container">
       <div class="logo logo--tab">
@@ -63,10 +72,8 @@
     </div>
   </header>
 
-  <!-- Main content: prerendered from status.md at build time, then
-       refreshed client-side from the live status.md (see script below). -->
   <main role="main" class="content__container">
-    <p class="status-updated">Last updated <time id="status-updated">October 20, 2026 at 12:39 PM CDT</time></p>
+    <p class="status-updated">Last updated <time id="status-updated">October 20, 2026 at 2:52 PM CDT</time></p>
     <div id="status-content">
 <h1>Campus status</h1>
 <p>Some University of Iowa websites and online services are temporarily unavailable.
@@ -74,31 +81,13 @@ Our teams are aware of the disruption and are working to restore normal service 
 quickly as possible.</p>
 <p>You don&#39;t need to report this outage. We&#39;ll update this page as we learn more.</p>
 <p><strong>Need help?</strong> Contact the ITS Help Desk at 319-384-4357.</p>
-<!--
-  COMMUNICATORS — READ ME (this block does NOT appear on the page)
 
-  The message above is the generic default that shows the moment this page goes
-  live. When you have specifics, replace it with incident details. A starting
-  template:
-
-  **What is affected:** (e.g., uiowa.edu and department sites)
-  **What is not affected:** (e.g., email, phones, in-person services)
-  **Next update by:** (date and time)
-
-  ## Past updates
-  - (date / time CT) — Initial notice posted.
-
-  Optional — only for an actual campus emergency. This channel works with no
-  login and no websites:
-  Get University of Iowa emergency alerts by texting HAWK4WEEK to 67283.
--->
     </div>
     <noscript>
       <p><a href="status.md">View the latest status update (plain text)</a></p>
     </noscript>
   </main>
 
-  <!-- Footer -->
   <footer class="footer">
     <div class="footer__container">
       <ul class="socket__menu">
@@ -110,9 +99,6 @@ quickly as possible.</p>
     </div>
   </footer>
 
-  <!-- Client-side render: fetch the live status.md and replace the
-       prerendered content, so a fresh edit reaches visitors even when the
-       build pipeline is down. On any failure the prerendered HTML stands. -->
   <script src="assets/marked.min.js"></script>
   <script>
     (function () {

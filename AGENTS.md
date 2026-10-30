@@ -73,8 +73,9 @@ robots.txt disallow** — they can deindex the real homepage. Temporary-outage
 signalling is done at the **edge** with HTTP `503` + `Retry-After`, not in the HTML.
 See the README's "Serving & SEO" section.
 
-## Review model
+## Access & publishing
 
-`CODEOWNERS` gives the `@uiowa/developer` team ownership of all plumbing;
-`status.md` is intentionally **ownerless** so outage content can be updated
-without a code review. Don't add an owner to `status.md`.
+`main` is open to direct commits for the `developer` and `leader` teams — no
+required PR or review; force-pushing and deleting `main` are blocked. A committed
+`status.md` edit publishes immediately (the point: it works even when CI is down).
+Developers commit plumbing from their machines; the Action rebuilds `index.html`.

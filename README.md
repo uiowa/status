@@ -21,12 +21,10 @@ infrastructure outages.
 1. Open [`status.md`](status.md) and click the pencil (**Edit**) icon on GitHub.
 2. Update the fields. Add each new update to the top of **Past updates** with a
    timestamp — keep older entries beneath it as a running log.
-3. Click **Commit changes**. Because `main` is protected, GitHub opens a quick
-   pull request — give it a short title, **Create**, then **Merge** it. No review
-   is required for `status.md`, so you can merge your own change right away.
+3. Click **Commit changes** and commit **directly to `main`** with a short message.
 
-The live page picks up the edit as soon as it merges; the Action rebuilds
-`index.html` a moment later.
+The live page picks up your edit right away; the Action rebuilds `index.html` a
+moment later.
 
 **Everything in `status.md` is public** — it's served as-is (the "plain text"
 link points at it), so never put anything private in it.

@@ -1,8 +1,8 @@
 name: Build status page
 
-# Rebuild index.html whenever the content or shell changes, and commit it back.
-# Loop guard: index.html is under paths-ignore, so the commit this job makes
-# does not retrigger the workflow.
+# Rebuild index.html when content or shell changes, and commit it back.
+# No loop: index.html isn't in the paths filter, and GITHUB_TOKEN pushes
+# don't trigger workflows.
 on:
   push:
     branches: [main]
@@ -27,10 +27,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
 
       # npm ci when a lockfile exists; otherwise a plain install. If this step
       # fails, the job stops here and the committed index.html is untouched.
@@ -50,5 +52,6 @@ jobs:
           else
             git add index.html
             git commit -m "Build: regenerate index.html from status.md [skip ci]"
+            git pull --rebase origin main
             git push
           fi

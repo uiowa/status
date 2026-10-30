@@ -15,8 +15,10 @@ tidiness or features.
 1. **`status.md` is the single source of truth** and the only file content
    editors touch. Keep its default message **generic and self-contained** — no
    `[fill in]` placeholders in the live text, because DNS may cut the homepage
-   over to this page before anyone edits it. The fill-in template lives in an
-   HTML comment (`<!-- ... -->`) that never renders.
+   over to this page before anyone edits it. `status.md` is served raw and is
+   fully public, so it holds only the live message — no private notes; the update
+   template lives in the README. It renders as **Markdown only** (raw HTML
+   dropped, URLs scheme-restricted) via `assets/render.mjs`.
 2. **Never hand-edit `index.html`.** It is generated. Change `status.md`
    (content) or `template.html` (layout), then run the build.
 3. **Do not hotlink anything except web fonts.** `marked`, the CSS, and the IOWA
@@ -60,6 +62,7 @@ Before shipping a change, confirm the ladder still holds:
 | `template.html` | Shell: brand bar, footer, critical inline CSS, render script. |
 | `build.mjs` | `marked(status.md)` → `template.html` → `index.html`. |
 | `assets/marked.min.js` | Vendored Markdown renderer (no CDN). |
+| `assets/render.mjs` | Shared Markdown renderer (build + browser); Markdown only. |
 | `assets/uids-branding.css` | Trimmed UIDS branding, self-contained tokens. |
 | `.github/workflows/build.yml` | Builds & commits `index.html` on change. |
 

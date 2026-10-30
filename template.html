@@ -98,45 +98,18 @@
     </div>
   </footer>
 
-  <!-- Client-side render: fetch the live status.md and replace the
-       prerendered content, so a fresh edit reaches visitors even when the
-       build pipeline is down. On any failure the prerendered HTML stands. -->
+  <!-- Client-side render: refresh content from the live status.md so a fresh
+       edit reaches visitors even when the build is down; prerender stands on failure. -->
   <script src="assets/marked.min.js"></script>
-  <script>
-    (function () {
-      if (!window.marked) return;
-
-      function formatCentral(date) {
-        try {
-          return new Intl.DateTimeFormat('en-US', {
-            timeZone: 'America/Chicago',
-            year: 'numeric', month: 'long', day: 'numeric',
-            hour: 'numeric', minute: '2-digit', timeZoneName: 'short'
-          }).format(date);
-        } catch (e) { return null; }
-      }
-
-      var lastModified = null;
+  <script type="module">
+    import { renderMarkdown } from './assets/render.mjs';
+    const el = document.getElementById('status-content');
+    if (el && window.marked) {
       fetch('status.md', { cache: 'no-store' })
-        .then(function (r) {
-          if (!r.ok) throw new Error(r.status);
-          lastModified = r.headers.get('Last-Modified');
-          return r.text();
-        })
-        .then(function (md) {
-          var el = document.getElementById('status-content');
-          if (el) el.innerHTML = window.marked.parse(md);
-          // Upgrade the stamp to the live file's modified time (correct even
-          // when the build is stale), falling back to the build-time value.
-          if (lastModified) {
-            var d = new Date(lastModified);
-            var stamp = document.getElementById('status-updated');
-            var text = isNaN(d.getTime()) ? null : formatCentral(d);
-            if (stamp && text) stamp.textContent = text;
-          }
-        })
-        .catch(function () { /* keep the prerendered fallback */ });
-    })();
+        .then((r) => { if (!r.ok) throw new Error(r.status); return r.text(); })
+        .then((md) => { el.innerHTML = renderMarkdown(md, window.marked.Marked); })
+        .catch(() => {});
+    }
   </script>
 </body>
 </html>

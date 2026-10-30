@@ -28,6 +28,26 @@ infrastructure outages.
 The live page picks up the edit as soon as it merges; the Action rebuilds
 `index.html` a moment later.
 
+**Everything in `status.md` is public** — it's served as-is (the "plain text"
+link points at it), so never put anything private in it.
+
+### Update template
+
+The default message stands on its own. When you have specifics, replace it with
+incident details — a starting point:
+
+```markdown
+**What is affected:** e.g., uiowa.edu and department sites
+**What is not affected:** e.g., email, phones, in-person services
+**Next update by:** date and time
+
+## Past updates
+- (date / time CT) — Initial notice posted.
+```
+
+For an actual campus emergency (not just a website outage), you can point people
+to Hawk Alerts, which needs no login or website: **text `HAWK4WEEK` to `67283`.**
+
 ## Repo layout
 
 | Path | Purpose |
@@ -37,6 +57,7 @@ The live page picks up the edit as soon as it merges; the Action rebuilds
 | `template.html` | Page shell: brand bar, footer, critical inline CSS, render script. |
 | `build.mjs` | ~30-line build: `marked(status.md)` → `template.html` → `index.html`. |
 | `assets/marked.min.js` | Vendored Markdown renderer (no CDN). |
+| `assets/render.mjs` | Shared Markdown renderer (build + browser); Markdown only. |
 | `assets/uids-branding.css` | Trimmed University of Iowa branding CSS. |
 | `.github/workflows/build.yml` | Builds and commits `index.html` on change. |
 
@@ -53,6 +74,10 @@ the cutover must:
   text, and prompts a later recrawl.
 - **Never add `noindex` or a robots.txt disallow.** Those mean *permanent* removal and
   can deindex `uiowa.edu`. `503` is the correct, reversible signal.
+- **Exempt `/assets/*` and `/status.md` from the edge rules.** The page loads them by
+  relative path; if the edge `503`s or catch-alls *every* path, the CSS/JS won't apply
+  and the live `status.md` fetch bails, so a fresh edit can't reach visitors while the
+  build is down (the inline critical CSS + prerender still show).
 
 GitHub Pages can't set a custom status (it serves `200`); accept that on that fallback
 leg only.

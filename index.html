@@ -70,7 +70,7 @@
   </header>
 
   <main role="main" class="content__container">
-    <p class="status-updated">Last updated <time id="status-updated">October 20, 2026 at 12:19 PM CDT</time></p>
+    <p class="status-updated">Last updated <time id="status-updated">October 30, 2026 at 10:59 AM CDT</time></p>
     <div id="status-content">
 <h1>Campus status</h1>
 <p>Some University of Iowa websites and online services are temporarily unavailable.
@@ -99,11 +99,22 @@ quickly as possible.</p>
   <script type="module">
     import { renderMarkdown } from './assets/render.mjs';
     const el = document.getElementById('status-content');
+    const stamp = document.getElementById('status-updated');
     if (el && window.marked) {
-      fetch('status.md', { cache: 'no-store' })
-        .then((r) => { if (!r.ok) throw new Error(r.status); return r.text(); })
-        .then((md) => { el.innerHTML = renderMarkdown(md, window.marked.Marked); })
-        .catch(() => {});
+      try {
+        const r = await fetch('status.md', { cache: 'no-store' });
+        if (!r.ok) throw new Error(r.status);
+        el.innerHTML = renderMarkdown(await r.text(), window.marked.Marked);
+        // Live content can be newer than the build stamp; trust the file's own
+        // Last-Modified so the stamp doesn't lag a fresh edit (Invalid Date if absent).
+        const d = new Date(r.headers.get('Last-Modified'));
+        if (stamp && !Number.isNaN(d.getTime())) {
+          stamp.textContent = new Intl.DateTimeFormat('en-US', {
+            timeZone: 'America/Chicago', year: 'numeric', month: 'long',
+            day: 'numeric', hour: 'numeric', minute: '2-digit', timeZoneName: 'short',
+          }).format(d);
+        }
+      } catch {}
     }
   </script>
 </body>
